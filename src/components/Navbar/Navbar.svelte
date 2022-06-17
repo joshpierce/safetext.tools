@@ -1,5 +1,5 @@
 <script lang="ts">
-    import { faTableColumns } from '@fortawesome/pro-light-svg-icons';
+    import { faTableColumns } from '@fortawesome/free-solid-svg-icons';
     import Fa from 'svelte-fa';
 </script>
 
