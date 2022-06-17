@@ -8,7 +8,6 @@
     export let menuItems: any[];
 
     function closeMobileNav() {
-        console.log('wrong wrong wrong');
         mobileNavIsOpen = false;
     }
 
@@ -91,17 +90,18 @@
             <div
                 class="flex-shrink-0 flex items-center px-4 h-16 text-white font-base text-2xl bg-[#202225]"
             >
-                <a href="/"> safetext.tools </a>
+                <a href="/" on:click={closeMobileNav}> safetext.tools </a>
             </div>
             <div class="mt-5 flex-1 h-0 overflow-y-auto">
                 <nav class="px-2 space-y-1">
                     {#each menuItems as item, itemIdx}
                         <a
                             href={item.url}
+                            on:click={closeMobileNav}
                             class="bg-[#42464E] text-white group flex items-center px-2 py-2 text-base font-medium rounded-md"
                         >
                             <div
-                                class="bg-red-500 grid place-items-center rounded-full h-8 w-8 mr-3"
+                                class="bg-[#7636B0] grid place-items-center rounded-full h-8 w-8 mr-3"
                             >
                                 <Fa icon={item.icon} />
                             </div>
