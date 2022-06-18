@@ -11,9 +11,9 @@
         value: separator.id,
     }));
     let fromSeparator = separatorItems.find((item) => item.value == 'newLine');
-    let otherFromSeparator = '';
+    let otherFromSeparator: string | undefined = '';
     let toSeparator = separatorItems.find((item) => item.value == 'comma');
-    let otherToSeparator = '';
+    let otherToSeparator: string | undefined = '';
 
     $: if (fromSeparator || otherFromSeparator || toSeparator || otherToSeparator) {
         if (!swapped) {
@@ -63,6 +63,17 @@
         let tempSep = fromSeparator;
         fromSeparator = toSeparator;
         toSeparator = tempSep;
+        if (fromSeparator?.value == 'other' || toSeparator?.value == 'other') {
+            console.log('swap test');
+            let to = fromSeparator?.value == 'other' ? otherToSeparator : undefined;
+            let from = toSeparator?.value == 'other' ? otherFromSeparator : undefined;
+            if (fromSeparator?.value == 'other') {
+                otherFromSeparator = to;
+            }
+            if (toSeparator?.value == 'other') {
+                otherToSeparator = from;
+            }
+        }
     }
 </script>
 
