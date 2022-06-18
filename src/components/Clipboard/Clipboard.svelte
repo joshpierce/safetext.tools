@@ -14,6 +14,11 @@
 
     const customScale = getCustomScale(300);
     $: rmScale = $reducedMotion ? customScale : scale;
+    $: if (processing) {
+        color.set('#3963FF');
+    } else if (!processing) {
+        color.set('#7636B0');
+    }
 
     const color = tweened('#7636B0', {
         duration: 300,
@@ -34,8 +39,9 @@
         }, 1500);
     }}
 >
-    <div
+    <button
         on:click={copy}
+        disabled={processing}
         class="absolute top-5 right-5 h-10 w-10 rounded-full"
         style="background-color: {$color}"
     >
@@ -64,5 +70,5 @@
                 <Fa icon={faCheck} fw class="text-white" />
             </div>
         {/if}
-    </div>
+    </button>
 </Clipboard>

@@ -2,7 +2,6 @@
     import Fa from 'svelte-fa';
     import { faRecycle, faRightLeft } from '@fortawesome/free-solid-svg-icons';
     import Clipboard from '$components/Clipboard/Clipboard.svelte';
-    import { text } from 'svelte/internal';
 
     let text1: string = '';
     let text2: string = '';
@@ -12,19 +11,20 @@
     let processingResponseTimeout: any;
 
     async function processText() {
-        clearTimeout(processingTimeout);
         processing = true;
+        clearTimeout(processingResponseTimeout);
+        clearTimeout(processingTimeout);
         processingTimeout = setTimeout(() => {
-            clearTimeout(processingResponseTimeout);
+            console.log('started processing');
             let items = text1.split(/\n/g);
             text2 = items.join(',');
-            processingResponseTimeout = setTimeout(() => {
-                processing = false;
-            }, 500);
         }, 500);
-    }
 
-    $: console.log('processing:', processing);
+        processingResponseTimeout = setTimeout(() => {
+            console.log('finished processing');
+            processing = false;
+        }, 1000);
+    }
 
     function swapLists() {
         let temp = text1;
@@ -39,6 +39,7 @@
             type="text"
             placeholder="Search"
             bind:value={text1}
+            on:input={processText}
             class="flex-grow border-gray-300 focus:border-gray-300 ring-0 focus:ring-0 pr-16"
             data-gramm="false"
             autocomplete="off"
@@ -56,15 +57,6 @@
             <div>
                 <Fa icon={faRightLeft} fw class="text-white inline mr-2" />
                 Swap Lists
-            </div>
-        </button>
-        <button
-            on:click={processText}
-            class="bg-[#0ACD40] rounded-md grid place-items-center p-2 mt-2 text-white"
-        >
-            <div>
-                <Fa icon={faRecycle} fw class="text-white inline mr-2" />
-                Process Text
             </div>
         </button>
     </div>
