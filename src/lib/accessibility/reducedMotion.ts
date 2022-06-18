@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { readable } from 'svelte/store';
 import { fade } from 'svelte/transition';
 import { quadInOut } from 'svelte/easing';
@@ -11,7 +12,7 @@ const getInitialMotionPreference = () =>
 export const reducedMotion = readable(getInitialMotionPreference(), (set) => {
     // Only run when in the browser because window isn't available in SSR
     if (browser) {
-        const updateMotionPreference = (event) => {
+        const updateMotionPreference = (event: any) => {
             set(event.matches);
         };
 
@@ -27,11 +28,11 @@ export const reducedMotion = readable(getInitialMotionPreference(), (set) => {
     }
 });
 
-export const getCustomFly = (duration) => {
+export const getCustomFly = (duration: number) => {
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
-    return (node, params) => fade(node, { duration, easing: quadInOut });
+    return (node: any) => fade(node, { duration, easing: quadInOut });
 };
 
-export const getCustomScale = (duration) => {
-    return (node, params) => fade(node, { duration, easing: quadInOut });
+export const getCustomScale = (duration: number) => {
+    return (node: any) => fade(node, { duration, easing: quadInOut });
 };

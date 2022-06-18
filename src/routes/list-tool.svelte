@@ -1,28 +1,30 @@
 <script lang="ts">
     import Fa from 'svelte-fa';
     import { faRightLeft } from '@fortawesome/free-solid-svg-icons';
+    import Clipboard from '$components/Clipboard/Clipboard.svelte';
+    import { text } from 'svelte/internal';
 
     let text1: string = '';
-    let swapping: boolean = false;
+    let text2: string = '';
+    let swapped: boolean = false;
 
     $: text2 = (() => {
         console.log('reacting!');
-        console.log('swapping: ', swapping);
-        return !swapping && text1 ? text1 + 'test' : '';
+        console.log('swapping: ', swapped);
+        const ret = !swapped && text1 ? text1 + 'test' : text2;
+        swapped = false;
+        return ret;
     })();
 
     function swapLists() {
         console.log('Setting swapping to true');
-        swapping = true;
+        swapped = true;
         let temp = text1;
         console.log('changing both values');
         text1 = text2;
         text2 = temp;
         console.log('changed both values');
         console.log('Setting swapping to false');
-        setTimeout(() => {
-            swapping = false;
-        }, 1000);
     }
 </script>
 
@@ -50,8 +52,9 @@
         type="text"
         placeholder="Search"
         bind:value={text2}
-        class="basis-2/5 h-full resize-none ring-0 focus:ring-0 border-l-[1px] border-gray-300"
+        class="basis-2/5 h-full resize-none ring-0 focus:ring-0 border-l-[1px] border-gray-300 relative"
         data-gramm="false"
         readonly
     />
+    <Clipboard bind:textValue={text2} />
 </div>
