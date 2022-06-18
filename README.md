@@ -26,5 +26,3 @@ npm run dev
 # (Alternatively, Start The Dev Server and Open It In Your Default Browser)
 npm run dev -- --open
 ```
-
-test
