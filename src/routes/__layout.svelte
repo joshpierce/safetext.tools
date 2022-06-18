@@ -9,7 +9,7 @@
 <div class="flex flex-col h-full">
     <Navbar bind:mobileNavIsOpen />
 
-    <div class="lg:pl-64 flex flex-col flex-grow">
+    <div class="lg:pl-64 flex flex-col flex-grow max-h-full">
         <MobileHeader bind:mobileNavIsOpen />
         <slot />
     </div>

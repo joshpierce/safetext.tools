@@ -1,6 +1,6 @@
 <script lang="ts">
     import Fa from 'svelte-fa';
-    import { faCopy, faCheck } from '@fortawesome/free-solid-svg-icons';
+    import { faCopy, faCheck, faSpinner } from '@fortawesome/free-solid-svg-icons';
     import Clipboard from 'svelte-clipboard';
     import { reducedMotion, getCustomScale } from '$lib/accessibility/reducedMotion';
     import { scale, fade } from 'svelte/transition';
@@ -9,6 +9,7 @@
     import { tweened } from 'svelte/motion';
 
     export let textValue: string;
+    export let processing: boolean;
     let isSuccess: boolean = false;
 
     const customScale = getCustomScale(300);
@@ -30,7 +31,7 @@
         setTimeout(() => {
             color.set('#7636B0');
             isSuccess = false;
-        }, 2500);
+        }, 1500);
     }}
 >
     <div
@@ -38,22 +39,29 @@
         class="absolute top-5 right-5 h-10 w-10 rounded-full"
         style="background-color: {$color}"
     >
-        {#if isSuccess}
+        {#if processing}
             <div
                 class="absolute top-1/2 left-1/2 -translate-y-1/2 -translate-x-1/2"
-                in:scale={{ duration: 300, easing: quadInOut }}
-                out:scale={{ duration: 300, easing: quadInOut }}
+                in:rmScale={{ duration: 300, easing: quadInOut }}
+                out:rmScale={{ duration: 300, easing: quadInOut }}
             >
-                <Fa icon={faCheck} fw class="text-white" />
+                <Fa icon={faSpinner} fw class="text-white" spin />
             </div>
-        {/if}
-        {#if !isSuccess}
+        {:else if !isSuccess}
             <div
                 class="absolute top-1/2 left-1/2 -translate-y-1/2 -translate-x-1/2"
-                in:scale={{ duration: 300, easing: quadInOut }}
-                out:scale={{ duration: 300, easing: quadInOut }}
+                in:rmScale={{ duration: 300, easing: quadInOut }}
+                out:rmScale={{ duration: 300, easing: quadInOut }}
             >
                 <Fa icon={faCopy} fw class="text-white" />
+            </div>
+        {:else if isSuccess}
+            <div
+                class="absolute top-1/2 left-1/2 -translate-y-1/2 -translate-x-1/2"
+                in:rmScale={{ duration: 300, easing: quadInOut }}
+                out:rmScale={{ duration: 300, easing: quadInOut }}
+            >
+                <Fa icon={faCheck} fw class="text-white" />
             </div>
         {/if}
     </div>
