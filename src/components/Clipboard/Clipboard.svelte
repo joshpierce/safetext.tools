@@ -17,6 +17,7 @@
     const color = tweened('#7636B0', {
         duration: 300,
         interpolate: interpolateLab,
+        easing: quadInOut,
     });
 </script>
 
