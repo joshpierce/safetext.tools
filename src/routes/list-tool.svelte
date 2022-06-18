@@ -18,6 +18,12 @@
     $: if (fromSeparator || otherFromSeparator || toSeparator || otherToSeparator) {
         if (!swapped) {
             processText();
+            if (fromSeparator?.value !== 'other') {
+                otherFromSeparator = undefined;
+            }
+            if (toSeparator?.value !== 'other') {
+                otherToSeparator = undefined;
+            }
         } else {
             swapped = false;
         }
