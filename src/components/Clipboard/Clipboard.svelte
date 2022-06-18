@@ -3,8 +3,8 @@
     import { faCopy, faCheck, faSpinner } from '@fortawesome/free-solid-svg-icons';
     import Clipboard from 'svelte-clipboard';
     import { reducedMotion, getCustomScale } from '$lib/accessibility/reducedMotion';
-    import { scale, fade } from 'svelte/transition';
-    import { quadInOut, linear } from 'svelte/easing';
+    import { scale } from 'svelte/transition';
+    import { quadInOut } from 'svelte/easing';
     import { interpolateLab } from 'd3-interpolate';
     import { tweened } from 'svelte/motion';
 
