@@ -29,6 +29,7 @@ const config = {
                     '@fortawesome/*',
                     '@fortawesome/fontawesome-free',
                     '@fortawesome/free-solid-svg-icons',
+                    'd3-interpolate',
                 ],
             },
         },
