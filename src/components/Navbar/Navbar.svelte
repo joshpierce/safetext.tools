@@ -1,5 +1,6 @@
 <script lang="ts">
     import { faTableColumns } from '@fortawesome/free-solid-svg-icons';
+    import { faGithub } from '@fortawesome/free-brands-svg-icons';
     import Fa from 'svelte-fa';
     import MobileNavbar from './MobileNavbar.svelte';
 
@@ -7,8 +8,8 @@
 
     const menuItems = [
         {
-            name: 'List Tool',
-            url: '/list-tool',
+            name: 'List Tools',
+            url: '/list-tools',
             icon: faTableColumns,
         },
     ];
@@ -38,6 +39,17 @@
                         {item.name}
                     </a>
                 {/each}
+            </nav>
+            <nav class="px-2 py-4">
+                <a
+                    href="https://github.com/joshpierce/safetext.tools"
+                    class="hover:bg-[#42464E] text-white group flex items-center px-2 py-2 text-sm font-base rounded-md"
+                >
+                    <div class="bg-black grid place-items-center rounded-full h-8 w-8 mr-3">
+                        <Fa icon={faGithub} fw class="text-white" />
+                    </div>
+                    Github
+                </a>
             </nav>
         </div>
     </div>

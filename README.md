@@ -1,38 +1,24 @@
-# create-svelte
+# SafeText.Tools
 
-Everything you need to build a Svelte project, powered by [`create-svelte`](https://github.com/sveltejs/kit/tree/master/packages/create-svelte).
+An open source collection of text tools available online that handle all text processing in the browser. This means that your data won't be sent to a server where it could be stored, scraped or abused.
 
-## Creating a project
+On top of this, SafeText.Tools is committed to providing online text processing tools without a seizure inducing number of online advertisements, popups, and various clickbait.
 
-If you're seeing this, you've probably already done this step. Congrats!
+## Available Tools
 
-```bash
-# create a new project in the current directory
-npm init svelte
+-   List Tools - Allows you to modify a lists separators.
 
-# create a new project in my-app
-npm init svelte my-app
-```
+## Development Getting Started
 
-## Developing
-
-Once you've created a project and installed dependencies with `npm install` (or `pnpm install` or `yarn`), start a development server:
+Get started by forking the repository [here](https://github.com/joshpierce/safetext.tools/fork). Once you've created your fork, pull the repository down locally, navigate into the directory and run the following commands
 
 ```bash
+# Install NPM Packages
+npm i
+
+# Start The Development Server
 npm run dev
 
-# or start the server and open the app in a new browser tab
+# (Alternatively, Start The Dev Server and Open It In Your Default Browser)
 npm run dev -- --open
 ```
-
-## Building
-
-To create a production version of your app:
-
-```bash
-npm run build
-```
-
-You can preview the production build with `npm run preview`.
-
-> To deploy your app, you may need to install an [adapter](https://kit.svelte.dev/docs/adapters) for your target environment.

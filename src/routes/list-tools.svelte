@@ -38,6 +38,7 @@
     let processingResponseTimeout: any;
 
     async function processText() {
+        console.log('Processing Queued...');
         processing = true;
         clearTimeout(processingResponseTimeout);
         clearTimeout(processingTimeout);
@@ -46,19 +47,21 @@
             let fromSeparatorData = from?.id == 'other' ? otherFromSeparator : from?.data;
             let to = separators.find((separator) => separator.id == toSeparator?.value);
             let toSeparatorData =
-                to?.id == 'other' ? otherToSeparator : to?.stringData || (to?.data as string);
+                to?.id == 'other' ? otherToSeparator || '' : to?.stringData || (to?.data as string);
 
             //todo: we shouldn't run into this case but we might want to have an alert if no separator is selected.
-            if (fromSeparatorData && toSeparatorData) {
+            if (fromSeparatorData !== undefined && toSeparatorData !== undefined) {
                 let items = text1.split(fromSeparatorData);
                 text2 = items.join(toSeparatorData);
+            } else {
+                text2 = '';
             }
-        }, 500);
+        }, 300);
 
         processingResponseTimeout = setTimeout(() => {
             console.log('finished processing');
             processing = false;
-        }, 1000);
+        }, 600);
     }
 
     function swapLists() {
