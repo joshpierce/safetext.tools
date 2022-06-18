@@ -141,6 +141,22 @@
     }
 </script>
 
+<svelte:head>
+    <title
+        >SafeText.Tools |
+        {fromSeparator?.value == 'other'
+            ? otherFromSeparator
+                ? `${otherFromSeparator}`
+                : 'List'
+            : `${fromSeparator?.label}`}
+        {toSeparator?.value == 'other'
+            ? otherToSeparator
+                ? ` to ${otherToSeparator}`
+                : ''
+            : ` to ${toSeparator?.label}`} List Converter And Tools</title
+    >
+</svelte:head>
+
 <div class="flex flex-row h-full items-stretch">
     <div class="flex-grow relative flex flex-row items-stretch ">
         <textarea
