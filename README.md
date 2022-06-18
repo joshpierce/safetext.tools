@@ -2,6 +2,8 @@
 
 An open source collection of text tools available online that handle all text processing in the browser. This means that your data won't be sent to a server where it could be stored, scraped or abused.
 
+Try it out here [https://safetext.tools](https://safetext.tools)
+
 On top of this, SafeText.Tools is committed to providing online text processing tools without a seizure inducing number of online advertisements, popups, and various clickbait.
 
 ## Available Tools
