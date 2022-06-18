@@ -4,15 +4,18 @@
     import Clipboard from '$components/Clipboard/Clipboard.svelte';
     import Select from '$components/FormControls/Select.svelte';
     import { separators } from '$data/separators';
+    import Input from '$components/FormControls/Input.svelte';
 
     let separatorItems = separators.map((separator) => ({
         label: separator.name,
         value: separator.id,
     }));
     let fromSeparator = separatorItems.find((item) => item.value == 'newLine');
+    let otherFromSeparator = '';
     let toSeparator = separatorItems.find((item) => item.value == 'comma');
+    let otherToSeparator = '';
 
-    $: if (fromSeparator && toSeparator) {
+    $: if (fromSeparator || otherFromSeparator || toSeparator || otherToSeparator) {
         if (!swapped) {
             processText();
         } else {
@@ -33,11 +36,11 @@
         clearTimeout(processingResponseTimeout);
         clearTimeout(processingTimeout);
         processingTimeout = setTimeout(() => {
-            let fromSeparatorData = separators.find(
-                (separator) => separator.id == fromSeparator?.value,
-            )?.data;
+            let from = separators.find((separator) => separator.id == fromSeparator?.value);
+            let fromSeparatorData = from?.id == 'other' ? otherFromSeparator : from?.data;
             let to = separators.find((separator) => separator.id == toSeparator?.value);
-            let toSeparatorData = to?.stringData || (to?.data as string);
+            let toSeparatorData =
+                to?.id == 'other' ? otherToSeparator : to?.stringData || (to?.data as string);
 
             //todo: we shouldn't run into this case but we might want to have an alert if no separator is selected.
             if (fromSeparatorData && toSeparatorData) {
@@ -90,12 +93,23 @@
             </div>
         </button>
         <div class="flex mt-4 space-x-4">
-            <div class="basis-1/2">
+            <div class="basis-1/2 flex flex-col">
                 <Select
                     label="From Separator"
                     items={separatorItems}
                     bind:currentItem={fromSeparator}
                 />
+                {#if fromSeparator?.value == 'other'}
+                    <div class="mt-4">
+                        <Input
+                            label="Custom Separator"
+                            name="customFromSeparator"
+                            id="customFromSeparator"
+                            placeholder="Enter Custom Separator..."
+                            bind:value={otherFromSeparator}
+                        />
+                    </div>
+                {/if}
             </div>
             <div class="basis-1/2">
                 <Select
@@ -103,6 +117,17 @@
                     items={separatorItems}
                     bind:currentItem={toSeparator}
                 />
+                {#if toSeparator?.value == 'other'}
+                    <div class="mt-4">
+                        <Input
+                            label="Custom Separator"
+                            name="customToSeparator"
+                            id="customToSeparator"
+                            placeholder="Enter Custom Separator..."
+                            bind:value={otherToSeparator}
+                        />
+                    </div>
+                {/if}
             </div>
         </div>
 

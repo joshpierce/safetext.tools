@@ -15,13 +15,13 @@ const separators: ISeparator[] = [
         id: 'newLine',
         name: 'New Line',
         data: /\n/g,
-        stringData: '\r\n',
+        stringData: '\n',
     },
     {
         id: 'blankLine',
         name: 'Blank Line',
-        data: /\r?\n/,
-        stringData: '\r\n\r\n',
+        data: /\n\n/g,
+        stringData: '\n\n',
     },
     {
         id: 'space',
