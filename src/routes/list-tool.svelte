@@ -11,7 +11,7 @@
     $: text2 = (() => {
         console.log('reacting!');
         console.log('swapping: ', swapped);
-        const ret = !swapped && text1 ? text1 + 'test' : text2;
+        const ret = !swapped ? text1.replace(/\n/g, ',') : text2;
         swapped = false;
         return ret;
     })();
@@ -29,13 +29,16 @@
 </script>
 
 <div class="flex flex-row h-full">
-    <textarea
-        type="text"
-        placeholder="Search"
-        bind:value={text1}
-        class="basis-2/5 h-full resize-none ring-0 focus:ring-0 border-r-[1px] border-gray-300"
-        data-gramm="false"
-    />
+    <div class="basis-2/5 h-full relative">
+        <textarea
+            type="text"
+            placeholder="Search"
+            bind:value={text1}
+            class="h-full w-full resize-none ring-0 focus:ring-0 border-r-[1px] border-gray-300 focus:border-gray-300"
+            data-gramm="false"
+        />
+        <Clipboard bind:textValue={text1} />
+    </div>
     <div class="basis-1/5 text-center flex flex-col py-2 px-4">
         <button
             on:click={swapLists}
@@ -48,13 +51,15 @@
         </button>
         <div />
     </div>
-    <textarea
-        type="text"
-        placeholder="Search"
-        bind:value={text2}
-        class="basis-2/5 h-full resize-none ring-0 focus:ring-0 border-l-[1px] border-gray-300 relative"
-        data-gramm="false"
-        readonly
-    />
-    <Clipboard bind:textValue={text2} />
+    <div class="basis-2/5 h-full relative">
+        <textarea
+            type="text"
+            placeholder="Search"
+            bind:value={text2}
+            class="h-full w-full resize-none ring-0 focus:ring-0 border-r-[1px] border-gray-300 focus:border-gray-300 pr-16"
+            data-gramm="false"
+            readonly
+        />
+        <Clipboard bind:textValue={text2} />
+    </div>
 </div>
