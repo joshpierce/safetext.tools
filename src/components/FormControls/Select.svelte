@@ -75,7 +75,7 @@
 
                         {#if item.value == currentItem?.value}
                             <span
-                                class="text-[#7636B0] absolute inset-y-0 right-0 flex items-center pr-4"
+                                class="text-[#982ef7] absolute inset-y-0 right-0 flex items-center pr-4"
                             >
                                 <Fa icon={selectedIcon} fw />
                             </span>

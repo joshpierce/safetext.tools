@@ -5,15 +5,77 @@
     import Select from '$components/FormControls/Select.svelte';
     import { separators } from '$data/separators';
     import Input from '$components/FormControls/Input.svelte';
+    import { page } from '$app/stores';
+    import { animals } from '$data/lists';
+    import { list } from 'postcss';
+
+    // Left Text
+    let text1: string = '';
+    // Right (computed) Text
+    let text2: string = '';
+    // Is the text swapped?
+    let swapped: boolean = false;
+    // Is the text processing?
+    let processing: boolean = false;
+    // Timeout controls for debouncing
+    let processingTimeout: any;
+    let processingResponseTimeout: any;
+
+    // Get Defaults from the Page Parameters
+    let routeParts = $page.params['listTools'].split('/');
+
+    let fromDefault = routeParts[0] || 'comma';
+    let otherFromDefault: string | undefined = undefined;
+    if (fromDefault.startsWith('other')) {
+        // Get all text after other into otherDefault
+        otherFromDefault = fromDefault.substring(5);
+        fromDefault = 'other';
+    }
+
+    let toDefault = routeParts[1] || 'newLine';
+    let otherToDefault: string | undefined = undefined;
+    if (toDefault.startsWith('other')) {
+        // Get all text after other into otherDefault
+        otherToDefault = toDefault.substring(5);
+        toDefault = 'other';
+    }
+
+    if (routeParts.length > 2) {
+        let initFromSeparator = separators.find(
+            (separator) => separator.id.toLowerCase() == fromDefault.toLowerCase(),
+        );
+        let initFromSeparatorData =
+            initFromSeparator?.id == 'other'
+                ? otherFromDefault || ''
+                : initFromSeparator?.stringData || (initFromSeparator?.data as string);
+        let listFound: boolean = false;
+        switch (routeParts[2]) {
+            case 'animals':
+                text1 = animals.join(initFromSeparatorData);
+                listFound = true;
+                break;
+        }
+        if (listFound) {
+            processText();
+        }
+    }
+
+    // let to = separators.find((separator) => separator.id == toSeparator?.value);
+    // let toSeparatorData =
+    //     to?.id == 'other' ? otherToSeparator || '' : to?.stringData || (to?.data as string);
 
     let separatorItems = separators.map((separator) => ({
         label: separator.name,
         value: separator.id,
     }));
-    let fromSeparator = separatorItems.find((item) => item.value == 'newLine');
-    let otherFromSeparator: string | undefined = '';
-    let toSeparator = separatorItems.find((item) => item.value == 'comma');
-    let otherToSeparator: string | undefined = '';
+    let fromSeparator = separatorItems.find(
+        (item) => item.value.toLowerCase() == fromDefault.toLowerCase(),
+    );
+    let otherFromSeparator: string | undefined = otherFromDefault || '';
+    let toSeparator = separatorItems.find(
+        (item) => item.value.toLowerCase() == toDefault.toLowerCase(),
+    );
+    let otherToSeparator: string | undefined = otherToDefault || '';
 
     $: if (fromSeparator || otherFromSeparator || toSeparator || otherToSeparator) {
         if (!swapped) {
@@ -29,14 +91,7 @@
         }
     }
 
-    let text1: string = '';
-    let text2: string = '';
-    let swapped: boolean = false;
-    let processing: boolean = false;
-
-    let processingTimeout: any;
-    let processingResponseTimeout: any;
-
+    // Timeout Trackers for Debounce
     async function processText() {
         console.log('Processing Queued...');
         processing = true;
@@ -105,7 +160,7 @@
     <div class="basis-1/4 text-center flex flex-col py-4 px-4">
         <button
             on:click={swapLists}
-            class="bg-[#7636B0] rounded-md grid place-items-center p-2 text-white"
+            class="bg-[#982ef7] rounded-md grid place-items-center p-2 text-white"
         >
             <div>
                 <Fa icon={faRightLeft} fw class="text-white inline mr-2" />

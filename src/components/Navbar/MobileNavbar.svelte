@@ -101,7 +101,7 @@
                             class="bg-[#42464E] text-white group flex items-center px-2 py-2 text-base font-medium rounded-md"
                         >
                             <div
-                                class="bg-[#7636B0] grid place-items-center rounded-full h-8 w-8 mr-3"
+                                class="bg-[#982ef7] grid place-items-center rounded-full h-8 w-8 mr-3"
                             >
                                 <Fa icon={item.icon} />
                             </div>

@@ -17,10 +17,10 @@
     $: if (processing) {
         color.set('#3963FF');
     } else if (!processing) {
-        color.set('#7636B0');
+        color.set('#982ef7');
     }
 
-    const color = tweened('#7636B0', {
+    const color = tweened('#982ef7', {
         duration: 300,
         interpolate: interpolateLab,
         easing: quadInOut,
@@ -32,9 +32,9 @@
     let:copy
     on:copy={() => {
         isSuccess = true;
-        color.set('#0ACD40');
+        color.set('#00ed42');
         setTimeout(() => {
-            color.set('#7636B0');
+            color.set('#982ef7');
             isSuccess = false;
         }, 1500);
     }}
@@ -42,7 +42,7 @@
     <button
         on:click={copy}
         disabled={processing}
-        class="absolute top-5 right-5 h-10 w-10 rounded-full"
+        class="absolute top-5 right-5 h-10 w-10 rounded-full shadow-md"
         style="background-color: {$color}"
     >
         {#if processing}

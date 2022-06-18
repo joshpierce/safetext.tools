@@ -33,7 +33,7 @@
                         href={item.url}
                         class="bg-[#42464E] text-white group flex items-center px-2 py-2 text-sm font-base rounded-md"
                     >
-                        <div class="bg-[#7636B0] grid place-items-center rounded-full h-8 w-8 mr-3">
+                        <div class="bg-[#982ef7] grid place-items-center rounded-full h-8 w-8 mr-3">
                             <Fa icon={item.icon} fw class="text-white" />
                         </div>
                         {item.name}
