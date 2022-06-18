@@ -23,7 +23,7 @@
         <div
             class="grid place-items-center h-16 flex-shrink-0 px-4 bg-[#202225] text-white font-semibold text-2xl"
         >
-            <a href="/"> xtxt.io </a>
+            <a href="/"> safetext.tools </a>
         </div>
         <div class="flex-1 flex flex-col overflow-y-auto">
             <nav class="flex-1 px-2 py-4 space-y-1">
