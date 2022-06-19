@@ -93,7 +93,6 @@
 
     // Timeout Trackers for Debounce
     async function processText() {
-        console.log('Processing Queued...');
         processing = true;
         clearTimeout(processingResponseTimeout);
         clearTimeout(processingTimeout);
@@ -114,7 +113,6 @@
         }, 300);
 
         processingResponseTimeout = setTimeout(() => {
-            console.log('finished processing');
             processing = false;
         }, 600);
     }
