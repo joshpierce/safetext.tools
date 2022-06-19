@@ -1,7 +1,7 @@
 ---
 name: Feature Request
 about: Suggest an idea for our text tools.
-title: "[FEATURE REQUEST]"
+title: "[FEATURE REQUEST]: Short Description of the Feature"
 labels: enhancement
 assignees: ''
 
